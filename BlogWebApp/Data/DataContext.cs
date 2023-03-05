@@ -13,6 +13,6 @@ public class DataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseSqlite(Configuration.GetConnectionString("BlogWebAppDatabase"));
+        options.UseNpgsql(Configuration.GetConnectionString("BlogWebAppDatabase"));
     }
 }
