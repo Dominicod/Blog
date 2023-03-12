@@ -1,10 +1,20 @@
-var builder = WebApplication.CreateBuilder(args);
+using BlogWebApp.Data;
+using Microsoft.EntityFrameworkCore;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+// Add services to the container.
+builder.Services.AddDbContext<DataContext>(options => 
+    options
+        .UseNpgsql(configuration["BlogWebAppDatabase"])
+);
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
