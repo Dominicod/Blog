@@ -24,6 +24,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -45,8 +50,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseAuthentication();
-
-app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
