@@ -9,7 +9,7 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>(options => 
-    options.UseNpgsql(configuration["BlogWebAppDatabase"] ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");)
+    options.UseNpgsql(configuration["BlogWebAppDatabase"] ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found."))
 );
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
